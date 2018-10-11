@@ -43,24 +43,32 @@ public class CollectionTestSuite {
     public void testOddNumbersExterminatorNormalList() {
         //Given
         List<Integer> someList = new ArrayList<>();
+        List<Integer> testRefeence = new ArrayList<>();
         OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
         for (int i = 0; i < 101; i++) {
             someList.add(i);
+            if(i%2== 0){
+                testRefeence.add(i);
+            }
         }
         List<Integer> evenList = oddNumbersExterminator.exterminate(someList);
         System.out.println("Testig if numbers on the list are even");
         //When
-        boolean isNumersOnTheListAreEven = false;
-        //evenList.add(3);
-        for (Integer someInt : evenList) {
-            if (someInt % 2 == 0) {
-                isNumersOnTheListAreEven = true;
-            } else {
-                isNumersOnTheListAreEven = false;
+        boolean isNumbersOnTheListAreEven = true;
+        for (int i = 0; i < evenList.size();i++){
+            isNumbersOnTheListAreEven = evenList.get(i).equals(testRefeence.get(i));
+            if (!isNumbersOnTheListAreEven){
+                break;
             }
         }
+        /*for (int i = 0; i < evenList.size();i++){
+            if (!testRefeence.contains(evenList.get(i))){
+                isNumbersOnTheListAreEven = false;
+                break;
+            }
+        }*/
         //Then
-        Assert.assertTrue(isNumersOnTheListAreEven);
+        Assert.assertTrue(isNumbersOnTheListAreEven);
     }
 
 }
