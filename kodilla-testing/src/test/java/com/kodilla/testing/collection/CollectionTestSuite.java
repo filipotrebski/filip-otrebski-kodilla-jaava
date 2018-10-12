@@ -34,8 +34,8 @@ public class CollectionTestSuite {
         List<Integer> emptyList = new ArrayList<>();
         //When
         boolean isListSizeNull = oddNumbersExterminator.exterminate(emptyList).isEmpty();
-        System.out.println("Testing empty list ");
         //Then
+        System.out.println("Testing empty list ");
         Assert.assertTrue(isListSizeNull);
     }
 
@@ -51,24 +51,11 @@ public class CollectionTestSuite {
                 testRefeence.add(i);
             }
         }
-        List<Integer> evenList = oddNumbersExterminator.exterminate(someList);
-        System.out.println("Testig if numbers on the list are even");
         //When
-        boolean isNumbersOnTheListAreEven = true;
-        for (int i = 0; i < evenList.size();i++){
-            isNumbersOnTheListAreEven = evenList.get(i).equals(testRefeence.get(i));
-            if (!isNumbersOnTheListAreEven){
-                break;
-            }
-        }
-        /*for (int i = 0; i < evenList.size();i++){
-            if (!testRefeence.contains(evenList.get(i))){
-                isNumbersOnTheListAreEven = false;
-                break;
-            }
-        }*/
+        List<Integer> evenList = oddNumbersExterminator.exterminate(someList);
         //Then
-        Assert.assertTrue(isNumbersOnTheListAreEven);
+        System.out.println("Testig if numbers on the list are even");
+        Assert.assertEquals(testRefeence,evenList);
     }
 
 }
