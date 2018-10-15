@@ -1,23 +1,17 @@
 package com.kodilla.testing;
 
-import com.kodilla.testing.collection.OddNumbersExterminator;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.kodilla.testing.shape.Shape;
+import com.kodilla.testing.shape.ShapeCollector;
+import com.kodilla.testing.shape.Square;
 
 public class TestingMain {
 
     public static void main(String[] args) {
-        OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
-        List<Integer> someList = new ArrayList<>();
-        for (int i= 0; i < 15; i++){
-            someList.add(i);
-        }
-        List<Integer> evenList = oddNumbersExterminator.exterminate(someList);
+        ShapeCollector shapeCollector = new ShapeCollector();
+        Shape shape = new Square(5);
+        shapeCollector.addFigure(shape);
+        shapeCollector.getShapes().add(shape);
 
-        for (Integer myInt : evenList){
-            System.out.println(myInt);
-        }
 
     }
 }
