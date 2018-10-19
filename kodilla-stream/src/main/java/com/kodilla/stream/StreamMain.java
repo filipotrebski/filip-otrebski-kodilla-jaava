@@ -26,11 +26,11 @@ public class StreamMain {
 
         String poem = "This is text to decorate";
         PoemBeautifier poemBeautifier = new PoemBeautifier();
-        poemBeautifier.beautify(poem, poem1 -> "ABC" + poem + "ABC");
-        poemBeautifier.beautify(poem, poem1 -> poem.toUpperCase());
-        poemBeautifier.beautify(poem, poem1 -> poem.replace("t", "X"));
-        poemBeautifier.beautify(poem,poem1 -> poem.substring(4,15));
-        poemBeautifier.beautify(poem, poem1 -> "\n******************************\n***" + poem.concat("***\n******************************"));
+        poemBeautifier.beautify(poem, poem1 -> "ABC" + poem1 + "ABC");
+        poemBeautifier.beautify(poem, poem1 -> poem1.toUpperCase());
+        poemBeautifier.beautify(poem, poem1 -> poem1.replace("t", "X"));
+        poemBeautifier.beautify(poem,poem1 -> poem1.substring(4,15));
+        poemBeautifier.beautify(poem, poem1 -> "\n******************************\n***" + poem1.concat("***\n******************************"));
 
 
     }
