@@ -1,39 +1,24 @@
 package com.kodilla.stream;
 
-import com.kodilla.stream.iterate.NumbersGenerator;
+import com.kodilla.stream.forumuser.Forum;
+import com.kodilla.stream.forumuser.ForumUser;
+
+import java.time.LocalDate;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StreamMain {
 
     public static void main(String[] args) {
-        System.out.println("Using Stream to generate even numbers from 1 to 20");
-        NumbersGenerator.generateEven(20);
-      /*  Processor processor = new Processor();
-        Executor codeToExecute = () -> System.out.println("This is example text");
-        processor.execute(codeToExecute);
-        processor.execute(() -> System.out.println("This is example no2"));
+        Forum forum = new Forum();
+        Map<Integer, ForumUser> userMap = forum.getForumUsers().stream()
+                .filter(forumUser -> forumUser.getUserSex() == 'M')
+                .filter(forumUser -> forumUser.getBirthDate().getYear() < LocalDate.now().getYear() - 20)
+                .filter(forumUser -> forumUser.getNumberOfPosts() > 0)
+                .collect(Collectors.toMap(ForumUser::getUserId,forumUser -> forumUser));
 
-        ExpressionExecutor expressionExecutor = new ExpressionExecutor();
-
-        System.out.println("Calculating expresions with lambdas");
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a + b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a - b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a * b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a / b);
-
-        System.out.println("Calculating expressions with methods references");
-        expressionExecutor.executeExpression(3, 4, FunctionalCalculator::multiplyAByB);
-        expressionExecutor.executeExpression(3, 4, FunctionalCalculator::addAToB);
-        expressionExecutor.executeExpression(3, 4, FunctionalCalculator::divideAByB);
-        expressionExecutor.executeExpression(3, 4, FunctionalCalculator::subBFromA);
-
-        String poem = "This is text to decorate";
-        PoemBeautifier poemBeautifier = new PoemBeautifier();
-        poemBeautifier.beautify(poem, poem1 -> "ABC" + poem1 + "ABC");
-        poemBeautifier.beautify(poem, poem1 -> poem1.toUpperCase());
-        poemBeautifier.beautify(poem, poem1 -> poem1.replace("t", "X"));
-        poemBeautifier.beautify(poem,poem1 -> poem1.substring(4,15));
-        poemBeautifier.beautify(poem, poem1 -> "\n******************************\n***" + poem1.concat("***\n******************************"));*/
-
-
-    }
-}
+        System.out.println("#Users on the list :" + userMap.size());
+        userMap.entrySet().stream()
+                .map(entry -> entry.getKey() + " : " + entry.getValue())
+                .forEach(System.out::println);
+}}
