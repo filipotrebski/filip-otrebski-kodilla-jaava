@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalDouble;
@@ -74,7 +75,7 @@ public class BoardTestSuite {
     }
 
     @Test
-    public void testAddTaskListAverageWorkingOnTask(){
+    public void testAddTaskListAverageWorkingOnTask() {
         //Given
         Board project = prepareTestData();
 
@@ -85,42 +86,42 @@ public class BoardTestSuite {
         OptionalDouble average = project.getTaskLists().stream()
                 .filter(inProgress::contains)
                 .flatMap(tl -> tl.getTasks().stream())
-                .mapToLong(t -> date.getDayOfYear()- t.getCreated().getDayOfYear())
+                .mapToLong(t -> ChronoUnit.DAYS.between(t.getCreated(), date))
                 .average();
         //Then
-        Assert.assertEquals(10.0,average.getAsDouble(),0.1);
+        Assert.assertEquals(10.0, average.getAsDouble(), 0.1);
 
     }
 
     @Test
-    public void testAddTaskList(){
+    public void testAddTaskList() {
         //Given
         Board project = prepareTestData();
 
         //When
 
         //Then
-        Assert.assertEquals(3,project.getTaskLists().size());
+        Assert.assertEquals(3, project.getTaskLists().size());
     }
 
     @Test
-    public void testAddTaskListFindUsersTasks(){
+    public void testAddTaskListFindUsersTasks() {
         //Given
         Board project = prepareTestData();
         //When
-        User user = new User("developer1","John Smith");
+        User user = new User("developer1", "John Smith");
         List<Task> tasks = project.getTaskLists().stream()
                 .flatMap(l -> l.getTasks().stream())
                 .filter(t -> t.getAssignedUser().equals(user))
                 .collect(Collectors.toList());
         //Then
-        Assert.assertEquals(2,tasks.size());
-        Assert.assertEquals(user,tasks.get(0).getAssignedUser());
-        Assert.assertEquals(user,tasks.get(1).getAssignedUser());
+        Assert.assertEquals(2, tasks.size());
+        Assert.assertEquals(user, tasks.get(0).getAssignedUser());
+        Assert.assertEquals(user, tasks.get(1).getAssignedUser());
     }
 
     @Test
-    public void testAddTaskListFindOutOutdatedTasks(){
+    public void testAddTaskListFindOutOutdatedTasks() {
         //Given
         Board project = prepareTestData();
 
@@ -130,16 +131,16 @@ public class BoardTestSuite {
         undoneTasks.add(new TaskList("In progress"));
         List<Task> tasks = project.getTaskLists().stream()
                 .filter(undoneTasks::contains)
-                .flatMap(tl ->tl.getTasks().stream())
-                .filter(t->t.getDeadline().isBefore(LocalDate.now()))
+                .flatMap(tl -> tl.getTasks().stream())
+                .filter(t -> t.getDeadline().isBefore(LocalDate.now()))
                 .collect(Collectors.toList());
         //Then
-        Assert.assertEquals(1,tasks.size());
+        Assert.assertEquals(1, tasks.size());
         Assert.assertEquals("HQLs for analysis", tasks.get(0).getTitle());
     }
 
     @Test
-    public void testAddTaskListFindLongTasks(){
+    public void testAddTaskListFindLongTasks() {
         //Given
         Board project = prepareTestData();
 
@@ -148,12 +149,12 @@ public class BoardTestSuite {
         inProgressTasks.add(new TaskList("In progress"));
         long longTasks = project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
-                .flatMap(tl ->tl.getTasks().stream())
+                .flatMap(tl -> tl.getTasks().stream())
                 .map(t -> t.getCreated())
                 .filter(d -> d.compareTo(LocalDate.now().minusDays(10)) <= 0)
                 .count();
         //Then
-        Assert.assertEquals(2,longTasks);
+        Assert.assertEquals(2, longTasks);
     }
 
 }
