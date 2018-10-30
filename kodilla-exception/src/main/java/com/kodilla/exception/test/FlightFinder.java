@@ -36,10 +36,10 @@ public class FlightFinder {
             e.printStackTrace();
         }
 
-//        try {
-//            flightFinder.findFlight(flight1);
-//        } catch (RouteNotFoundException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            flightFinder.findFlight(flight1);
+       } catch (RouteNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
