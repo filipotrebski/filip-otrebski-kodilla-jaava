@@ -22,4 +22,13 @@ public class Product {
     public int getUnitsInStock() {
         return unitsInStock;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productName='" + productName + '\'' +
+                ", price=" + price +
+                ", unitsInStock=" + unitsInStock +
+                '}';
+    }
 }
