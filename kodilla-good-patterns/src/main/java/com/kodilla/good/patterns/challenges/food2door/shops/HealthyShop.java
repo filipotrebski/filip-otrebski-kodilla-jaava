@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class HealthyShop implements FoodSuplier {
+public class HealthyShop implements FoodSupplier {
     private static final String VEGETABLES = "Vegetables";
     private static final String MEAT = "Meat";
     private static final String FRUITS = "Fruits";

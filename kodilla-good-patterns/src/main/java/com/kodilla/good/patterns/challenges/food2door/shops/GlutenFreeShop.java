@@ -4,7 +4,7 @@ import com.kodilla.good.patterns.challenges.food2door.FoodProduct;
 
 import java.util.Iterator;
 
-public class GlutenFreeShop implements FoodSuplier {
+public class GlutenFreeShop implements FoodSupplier {
 
     private FoodProduct[] inventory;
 

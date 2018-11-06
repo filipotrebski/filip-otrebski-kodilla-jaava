@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ExtraFoodShop implements FoodSuplier {
+public class ExtraFoodShop implements FoodSupplier {
 
 
     private List<FoodProduct> inventory = new ArrayList<>();

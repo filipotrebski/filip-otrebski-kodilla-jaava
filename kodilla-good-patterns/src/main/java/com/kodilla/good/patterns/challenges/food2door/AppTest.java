@@ -6,7 +6,10 @@ import com.kodilla.good.patterns.challenges.food2door.shops.HealthyShop;
 
 public class AppTest {
     public static void main(String[] args) {
-        Order order = new Order(new ExtraFoodShop(),new GlutenFreeShop(),new HealthyShop());
+        Order order = new Order();
+        order.addNewSupplier(new ExtraFoodShop());
+        order.addNewSupplier(new HealthyShop());
+        order.addNewSupplier(new GlutenFreeShop());
 
         order.printSuppliersInventory();
         System.out.println("________________________");

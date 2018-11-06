@@ -1,24 +1,21 @@
 package com.kodilla.good.patterns.challenges.food2door;
 
-import com.kodilla.good.patterns.challenges.food2door.shops.FoodSuplier;
+import com.kodilla.good.patterns.challenges.food2door.shops.FoodSupplier;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class Order {
-    private List<FoodSuplier> suppliers = new ArrayList<>();
+
+    private List<FoodSupplier> suppliers = new ArrayList<>();
     private List<FoodProduct> products = new ArrayList<>();
 
-    public Order(FoodSuplier supplier, FoodSuplier supplier1, FoodSuplier supplier2) {
-        suppliers.add(supplier);
-        suppliers.add(supplier1);
-        suppliers.add(supplier2);
-    }
-
     public void printSuppliersInventory() {
-        for (FoodSuplier foodSuplier : suppliers) {
-            printSuppliersInventory(foodSuplier.createIterator());
+        if (suppliers.size() > 0) {
+            for (FoodSupplier foodSupplier : suppliers) {
+                printSuppliersInventory(foodSupplier.createIterator());
+            }
         }
     }
 
@@ -32,16 +29,20 @@ public class Order {
 
     public void createOrder(int productNumber) {
         FoodProduct product = products.get(productNumber);
-       for (FoodSuplier foodSuplier : suppliers) {
-           foodSuplier.process(product);
-       }
+        for (FoodSupplier foodSupplier : suppliers) {
+            foodSupplier.process(product);
+        }
     }
 
     public List<FoodProduct> getProducts() {
         return products;
     }
 
-    public List<FoodSuplier> getSuppliers() {
+    public List<FoodSupplier> getSuppliers() {
         return suppliers;
+    }
+
+    public void addNewSupplier(FoodSupplier supplier) {
+        suppliers.add(supplier);
     }
 }

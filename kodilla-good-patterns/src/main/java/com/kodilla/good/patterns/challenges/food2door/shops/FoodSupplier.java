@@ -4,7 +4,7 @@ import com.kodilla.good.patterns.challenges.food2door.FoodProduct;
 
 import java.util.Iterator;
 
-public interface FoodSuplier {
+public interface FoodSupplier {
     void process(FoodProduct product);
     Iterator createIterator();
 }
