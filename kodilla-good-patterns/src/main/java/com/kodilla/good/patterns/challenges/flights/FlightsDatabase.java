@@ -32,7 +32,7 @@ public class FlightsDatabase implements Connections {
         System.out.println("Available connections from " + source);
         flights.stream()
                 .filter(flight -> flight.getDepartureAirport().equals(source))
-                .map(f -> f.getArrivalAirport())
+                .map(f -> f.toString())
                 .forEach(System.out::println);
     }
 
