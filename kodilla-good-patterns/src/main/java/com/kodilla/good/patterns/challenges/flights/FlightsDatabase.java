@@ -29,9 +29,10 @@ public class FlightsDatabase implements Connections {
 
     @Override
     public void printConnections(String source) {
+        System.out.println("Available connections from " + source);
         flights.stream()
-                .map(f -> f.getDepartureAirport())
-                .filter(s -> s.equals(source))
+                .filter(flight -> flight.getDepartureAirport().equals(source))
+                .map(f -> f.getArrivalAirport())
                 .forEach(System.out::println);
     }
 
