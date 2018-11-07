@@ -8,24 +8,25 @@ public class FlightFinder implements ConnectionFinder {
     private FlightsDatabase database = new FlightsDatabase();
 
     @Override
-    public void findConnection(String departure, String arrival) {
+    public List<Flight> findConnection(String departure, String arrival) {
         List<Flight> flights = database.getFlights().stream()
                 .filter(flight -> flight.getDepartureAirport().equals(departure))
                 .filter(flight -> flight.getArrivalAirport().equals(arrival))
                 .collect(Collectors.toList());
-        flights.stream().forEach(System.out::println);
+        return flights;
     }
 
     @Override
-    public void findIndirectConnections(String departure, String arrival) {
+    public List<Flight> findIndirectConnections(String departure, String arrival) {
         List<Flight> flights = database.getFlights().stream()
                 .filter(flight -> flight.getDepartureAirport().equals(departure) && !flight.getArrivalAirport().equals(arrival))
                 .collect(Collectors.toList());
+        List<Flight> flightList = null;
         for (Flight flight : flights) {
             String middle = flight.getArrivalAirport();
-            System.out.println("\nStage 1 : \n " + flight.toString());
-            System.out.println("Stage 2");
-            findConnection(middle, arrival);
+            flightList = findConnection(middle,arrival);
         }
+        flightList.stream().collect(Collectors.toCollection(() -> flights));
+        return flights;
     }
 }

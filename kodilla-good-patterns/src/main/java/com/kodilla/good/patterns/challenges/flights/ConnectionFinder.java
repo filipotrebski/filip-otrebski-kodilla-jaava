@@ -1,6 +1,8 @@
 package com.kodilla.good.patterns.challenges.flights;
 
+import java.util.List;
+
 public interface ConnectionFinder {
-    void findConnection(String departure, String arrival);
-    void findIndirectConnections(String departure, String arrival);
+    List<Flight> findConnection(String departure, String arrival);
+    List<Flight> findIndirectConnections(String departure, String arrival);
 }

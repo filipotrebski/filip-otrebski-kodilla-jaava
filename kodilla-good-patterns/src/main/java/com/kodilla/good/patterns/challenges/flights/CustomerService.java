@@ -1,5 +1,7 @@
 package com.kodilla.good.patterns.challenges.flights;
 
+import java.util.List;
+
 public class CustomerService {
     private Connections connections;
     private ConnectionFinder connectionFinder;
@@ -9,13 +11,18 @@ public class CustomerService {
         this.connectionFinder = connectionFinder;
     }
 
-    public void printAllConnectionsFrom (String from) {
-        connections.printConnections(from);
+    public List<Flight> allDeparturesFrom(String from) {
+        return connections.allFlightsFromAirport(from);
     }
 
-    public void printConnectionsFromTo(String departure, String arrival){
-        connectionFinder.findConnection(departure,arrival);
-        connectionFinder.findIndirectConnections(departure,arrival);
+    public List<Flight> allArrivalsTo(String destination) {
+        return connections.allFlightsToAirport(destination);
     }
 
+    public List<Flight> directConnections(String departure, String arrival) {
+       return connectionFinder.findConnection(departure, arrival);
+    }
+    public List<Flight> connectionsWithStepover(String departure, String arrival){
+        return connectionFinder.findIndirectConnections(departure,arrival);
+    }
 }
