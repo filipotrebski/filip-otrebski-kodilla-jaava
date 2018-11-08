@@ -2,7 +2,7 @@ package com.kodilla.good.patterns.challenges.flights;
 
 public class FlightApp {
     public static void main(String[] args) {
-        CustomerService service = new CustomerService(new FlightsDatabase(),new FlightFinder());
+        CustomerService service = new CustomerService(new FlightFinder());
 
 
         service.allDeparturesFrom(Airports.KRAKOW.getAirport()).stream().forEach(System.out::println);

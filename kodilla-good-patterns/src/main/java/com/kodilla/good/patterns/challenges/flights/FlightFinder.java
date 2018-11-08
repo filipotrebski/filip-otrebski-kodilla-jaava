@@ -29,4 +29,21 @@ public class FlightFinder implements ConnectionFinder {
         flightList.stream().collect(Collectors.toCollection(() -> flights));
         return flights;
     }
+
+    @Override
+    public List<Flight> allFlightsFromAirport(String source) {
+        System.out.println("Available connections from " + source);
+        List<Flight> departures = database.getFlights().stream()
+                .filter(flight -> flight.getDepartureAirport().equals(source))
+                .collect(Collectors.toList());
+        return departures;
+    }
+
+    @Override
+    public List<Flight> allFlightsToAirport(String destination) {
+        List<Flight> arrivals = database.getFlights().stream()
+                .filter(flight -> flight.getArrivalAirport().equals(destination))
+                .collect(Collectors.toList());
+        return arrivals;
+    }
 }
