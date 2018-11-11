@@ -21,7 +21,7 @@ public class BoardConfig {
 
     @Bean
     public Board getBoard(){
-        return new Board(getToDoList(), getInProgressList(),getDoneList());
+        return new Board(toDoList,inProgressList,doneList);
     }
 
     @Bean(name = "todo")
