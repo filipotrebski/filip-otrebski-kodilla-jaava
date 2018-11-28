@@ -4,6 +4,6 @@ public class ExecuteSaySomething implements Executor {
 
     @Override
     public void process() {
-        System.out.println("This is example text");
+        System.out.println("This is kodilla text");
     }
 }
