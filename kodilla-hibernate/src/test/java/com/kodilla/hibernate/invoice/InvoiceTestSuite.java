@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class InvoiceTestSuite {
     @Autowired
     private InvoiceDao invoiceDao;
@@ -54,19 +56,6 @@ public class InvoiceTestSuite {
 
         //Then
         Assert.assertNotEquals(0, invoiceId);
-
-        //Clean up
-        try {
-            invoiceDao.delete(invoiceId);
-            itemDao.delete(item1id);
-            itemDao.delete(item2id);
-            itemDao.delete(item3Id);
-            productDao.delete(product1Id);
-            productDao.delete(product2Id);
-            productDao.delete(product3Id);
-        } catch (Exception e) {
-            //do nothing
-        }
 
     }
 }
