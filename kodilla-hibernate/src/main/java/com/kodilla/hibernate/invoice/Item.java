@@ -30,9 +30,7 @@ public class Item {
         return id;
     }
 
-    @ManyToOne(targetEntity = Product.class,
-            fetch = FetchType.EAGER
-    )
+    @ManyToOne
     @JoinColumn(name = "PRODUCT_ID")
     public Product getProduct() {
         return product;
