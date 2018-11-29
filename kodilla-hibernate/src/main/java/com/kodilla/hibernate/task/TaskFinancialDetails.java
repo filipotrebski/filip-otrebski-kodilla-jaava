@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "TASK_FINANCIAALS")
+@Table(name = "TASK_FINANCIAL")
 public class TaskFinancialDetails {
     private int id;
     private BigDecimal price;
@@ -22,16 +22,30 @@ public class TaskFinancialDetails {
     @Id
     @GeneratedValue
     @NotNull
-    @Column()
+    @Column(name = "ID", unique = true)
     public int getId() {
         return id;
     }
 
+    @Column(name = "PRICE")
     public BigDecimal getPrice() {
         return price;
     }
 
+    @Column(name = "PAID")
     public boolean isPaid() {
         return paid;
+    }
+
+    private void setId(int id) {
+        this.id = id;
+    }
+
+    private void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    private void setPaid(boolean paid) {
+        this.paid = paid;
     }
 }
