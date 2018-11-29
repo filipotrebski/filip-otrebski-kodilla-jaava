@@ -1,6 +1,7 @@
 package com.kodilla.hibernate.invoice;
 
 import com.kodilla.hibernate.invoice.dao.InvoiceDao;
+import com.kodilla.hibernate.invoice.dao.ItemDao;
 import com.kodilla.hibernate.invoice.dao.ProductDao;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,6 +21,9 @@ public class InvoiceTestSuite {
     @Autowired
     private ProductDao productDao;
 
+    @Autowired
+    private ItemDao itemDao;
+
     @Test
     public void testInvoiceDaoSave() {
         //Given
@@ -31,9 +35,11 @@ public class InvoiceTestSuite {
         int product3Id = product3.getId();
 
         Item item1 = new Item(product1, new BigDecimal(2), 3);
+        int item1id = item1.getId();
         Item item2 = new Item(product2, new BigDecimal(5), 7);
+        int item2id = item2.getId();
         Item item3 = new Item(product3, new BigDecimal(11), 13);
-
+        int item3Id = item3.getId();
         Invoice invoice = new Invoice("17");
         invoice.getItems().add(item1);
         invoice.getItems().add(item2);
@@ -52,6 +58,9 @@ public class InvoiceTestSuite {
         //Clean up
         try {
             invoiceDao.delete(invoiceId);
+            itemDao.delete(item1id);
+            itemDao.delete(item2id);
+            itemDao.delete(item3Id);
             productDao.delete(product1Id);
             productDao.delete(product2Id);
             productDao.delete(product3Id);
