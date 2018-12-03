@@ -1,6 +1,7 @@
 package com.kodilla.hibernate.manytomany;
 
 import com.kodilla.hibernate.manytomany.dao.CompanyDao;
+import com.kodilla.hibernate.manytomany.dao.EmployeeDao;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,11 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class CompanyDaoTestSuite {
     @Autowired
     private CompanyDao companyDao;
+
+    @Autowired
+    private EmployeeDao employeeDao;
 
     @Test
     public void testSaveManyToMany() {
@@ -46,9 +54,9 @@ public class CompanyDaoTestSuite {
         int greyMatterId = greyMatter.getId();
 
         //Then
-        Assert.assertNotEquals(0,softwareMachineId);
-        Assert.assertNotEquals(0,dataMastersId);
-        Assert.assertNotEquals(0,greyMatterId);
+        Assert.assertNotEquals(0, softwareMachineId);
+        Assert.assertNotEquals(0, dataMastersId);
+        Assert.assertNotEquals(0, greyMatterId);
 
         //Clean up
         try {
@@ -58,5 +66,41 @@ public class CompanyDaoTestSuite {
         } catch (Exception e) {
             //do nothing
         }
+    }
+
+    @Test
+    public void testFindByBeaningOfTheCompanyName() {
+        //Given
+        Company softwareMachine = new Company("Software Machine");
+        Company dataMaesters = new Company("Data Maesters");
+        Company greyMatter = new Company("Grey Matter");
+
+        companyDao.save(softwareMachine);
+        companyDao.save(dataMaesters);
+        companyDao.save(greyMatter);
+
+        //When
+        List<Company> companies = companyDao.findBy3FirstLetters("gre");
+
+        //Then
+        Assert.assertEquals(1, companies.size());
+    }
+
+    @Test
+    public void testFindAllEmployeesWithLastName() {
+        //Given
+        Employee johnSmith = new Employee("John", "Smith");
+        Employee stephanieClarckson = new Employee("Stephanie", "Clarckson");
+        Employee lindaKovalsky = new Employee("Linda", "Kovalsky");
+
+        employeeDao.save(johnSmith);
+        employeeDao.save(stephanieClarckson);
+        employeeDao.save(lindaKovalsky);
+
+        //When
+        List<Employee> employees = employeeDao.findAllEmployeesWithLastName("Smith");
+
+        //Then
+        Assert.assertEquals(1,employees.size());
     }
 }
