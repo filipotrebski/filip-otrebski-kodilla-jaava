@@ -4,10 +4,17 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-@NamedQuery(
-        name = "Company.findBy3FirstLetters",
-        query = "FROM Company WHERE name LIKE CONCAT(:COMPANY_NAME,'%')"
-)
+
+@NamedQueries({
+        @NamedQuery(
+                name = "Company.findBy3FirstLetters",
+                query = "FROM Company WHERE name LIKE CONCAT(:COMPANY_NAME,'%')"
+        ),
+        @NamedQuery(
+                name = "Company.findByNameFragment",
+                query = "FROM Company WHERE name LIKE CONCAT('%',:COMPANY_NAME,'%')"
+        )
+})
 @Entity
 @Table(name = "COMPANIES")
 public class Company {

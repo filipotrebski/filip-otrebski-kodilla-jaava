@@ -69,7 +69,7 @@ public class CompanyDaoTestSuite {
     }
 
     @Test
-    public void testFindByBeaningOfTheCompanyName() {
+    public void testFindByBeginingOfTheCompanyName() {
         //Given
         Company softwareMachine = new Company("Software Machine");
         Company dataMaesters = new Company("Data Maesters");
