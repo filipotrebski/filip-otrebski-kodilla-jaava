@@ -3,9 +3,11 @@ package com.kodilla.hibernate.manytomany;
 import com.kodilla.hibernate.manytomany.dao.CompanyDao;
 import com.kodilla.hibernate.manytomany.dao.EmployeeDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Service;
 
 @Service
+@EnableAspectJAutoProxy
 public class FinderService {
 
     @Autowired

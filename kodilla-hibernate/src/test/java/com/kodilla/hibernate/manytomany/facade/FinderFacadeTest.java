@@ -61,6 +61,7 @@ public class FinderFacadeTest {
         employeeDao.save(employee2);
         employeeDao.save(employee3);
 
+        finderFacade.findEmployee("arc");
         //When
         List<Employee> employees = employeeDao.findByLastNameFragment("arc");
         //Then
