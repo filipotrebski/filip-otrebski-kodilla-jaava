@@ -46,6 +46,6 @@ public class StoredProcTestSuite {
         if (rs.next()) {
             noOfBesstsellers = rs.getInt("NO_OF_BESTSELLERS");
         }
-        assertEquals(1, noOfBesstsellers);
+        assertEquals(2, noOfBesstsellers);
     }
 }
