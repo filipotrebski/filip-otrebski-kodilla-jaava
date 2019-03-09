@@ -10,6 +10,9 @@ public class FacebookTestingApp {
     public static final String XPATH_DAY_SELECT = "//div[contains(@class, \"_5k_5\")]/span/span/select[1]";
     public static final String XPATH_MONTH_SELECT = "//div[contains(@class, \"_5k_5\")]/span/span/select[2]";
     public static final String XPATH_YEAR_SELECT = "//div[contains(@class, \"_5k_5\")]/span/span/select[3]";
+    public static final String XPATH_FIRSTNAME = "//div[contains(@class, \"mbm _1iy_ _a4y _3-90 lfloat _ohe\")]/div/div/input";
+    public static final String XPATH_LASTNAME = "//div[contains(@class, \"mbm _1iy_ _a4y rfloat _ohf\")]/div/div/input";
+    public static final String XPATH_EMAIL = "//div[contains(@class, \"mbm _a4y\")]/div/div/input";
 
     public static void main(String[] args) {
         WebDriver driver = WebDriverConfig.getDriver(WebDriverConfig.CHROME);
@@ -26,5 +29,14 @@ public class FacebookTestingApp {
         WebElement selectBirthdayYear = driver.findElement(By.xpath(XPATH_YEAR_SELECT));
         Select selectYear = new Select(selectBirthdayYear);
         selectYear.selectByValue("1999");
+
+        WebElement inputFirstame = driver.findElement(By.xpath(XPATH_FIRSTNAME));
+        inputFirstame.sendKeys("Tyrion");
+
+        WebElement inputLastname = driver.findElement(By.xpath(XPATH_LASTNAME));
+        inputLastname.sendKeys("Lanister");
+
+        WebElement inputEmail = driver.findElement(By.xpath(XPATH_EMAIL));
+        inputEmail.sendKeys("lanistersalwayspaysthietdebts@casterlyrock.com");
     }
 }
