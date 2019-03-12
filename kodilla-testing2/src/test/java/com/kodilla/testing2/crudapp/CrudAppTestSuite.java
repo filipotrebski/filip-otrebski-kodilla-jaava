@@ -94,7 +94,7 @@ public class CrudAppTestSuite {
         Thread.sleep(2000);
 //*[@id="board"]/div[1]/div[1]/div[2]/a[4]/div[3]/span/text()
         //*[@id="board"]/div[1]/div[1]/div[2]/a[4]/div[3]/span/span
-        result = driverTrello.findElements(By.xpath("//span")).stream()
+        result = driverTrello.findElements(By.xpath("//span[@class=\"list-card-title js-card-name\"]")).stream()
                 .filter(theSpan -> theSpan.getText().equals(taskName))
                 .collect(Collectors.toList())
                 .size() > 0;
