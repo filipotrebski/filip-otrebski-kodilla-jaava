@@ -69,8 +69,10 @@ public class CrudAppTestSuite {
                             theForm.findElement(By.xpath(".//button[contains(@class, \"card-creation\")]"));
                     buttonCreateCard.click();
                 });
-        Thread.sleep(5000);
 
+        Thread.sleep(5000);
+        driver.switchTo().alert().accept();
+        Thread.sleep(5000);
     }
 
     public boolean checkTaskExistsInTrello(String taskName) throws InterruptedException {
@@ -79,8 +81,8 @@ public class CrudAppTestSuite {
         WebDriver driverTrello = WebDriverConfig.getDriver(WebDriverConfig.CHROME);
         driverTrello.get(TRELLO_URL);
 
-        driverTrello.findElement(By.id("user")).sendKeys("*********");
-        driverTrello.findElement(By.id("password")).sendKeys("*********");
+        driverTrello.findElement(By.id("user")).sendKeys("filipotrebski");
+        driverTrello.findElement(By.id("password")).sendKeys("8Ycs2PWvAUAPgTd");
         driverTrello.findElement(By.id("login")).submit();
 
         Thread.sleep(2000);
@@ -90,9 +92,10 @@ public class CrudAppTestSuite {
                 .forEach(aHref -> aHref.click());
 
         Thread.sleep(2000);
-
+//*[@id="board"]/div[1]/div[1]/div[2]/a[4]/div[3]/span/text()
+        //*[@id="board"]/div[1]/div[1]/div[2]/a[4]/div[3]/span/span
         result = driverTrello.findElements(By.xpath("//span")).stream()
-                .filter(theSpan -> theSpan.getText().contains(taskName))
+                .filter(theSpan -> theSpan.getText().equals(taskName))
                 .collect(Collectors.toList())
                 .size() > 0;
 
@@ -109,7 +112,7 @@ public class CrudAppTestSuite {
                     WebElement buttonDelete = theForm.findElement(By.xpath(".//button[4]"));
                     buttonDelete.click();
                 });
-        Thread.sleep(5000);
+
     }
 
     @Test
